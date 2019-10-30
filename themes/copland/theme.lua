@@ -17,16 +17,20 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
 theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "Terminus 10.5"
-theme.fg_normal                                 = "#BBBBBB"
-theme.fg_focus                                  = "#78A4FF"
+theme.font                                      = "Terminus 12"
+theme.fg_normal                                 = "#909090"
+theme.fg_focus                                  = "#E0E0E0"
 theme.bg_normal                                 = "#111111"
 theme.bg_focus                                  = "#111111"
 theme.fg_urgent                                 = "#000000"
 theme.bg_urgent                                 = "#FFFFFF"
-theme.border_width                              = dpi(1)
+theme.border_width                              = dpi(2)
 theme.border_normal                             = "#141414"
-theme.border_focus                              = "#93B6FF"
+theme.border_focus                              = "#409940"
+theme.hotkeys_font                              = "Terminus 14"
+theme.hotkeys_description_font                  = "Terminus 14"
+theme.hotkeys_group_margin                      = 40
+theme.hotkeys_shape                             = gears.shape.rounded_rect
 theme.taglist_fg_focus                          = "#FFFFFF"
 theme.taglist_bg_focus                          = "#111111"
 theme.taglist_bg_normal                         = "#111111"
@@ -35,7 +39,7 @@ theme.titlebar_bg_focus                         = "#262626"
 theme.menu_height                               = dpi(16)
 theme.menu_width                                = dpi(130)
 theme.tasklist_disable_icon                     = true
-theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
+theme.awesome_icon                              = theme.dir .. "/icons/awesome.png"
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
 theme.taglist_squares_sel                       = theme.dir .. "/icons/square_unsel.png"
 theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
@@ -288,16 +292,6 @@ local first     = wibox.widget.textbox(markup.font("Terminus 3", " "))
 local spr       = wibox.widget.textbox(' ')
 local small_spr = wibox.widget.textbox(markup.font("Terminus 4", " "))
 local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.fontfg(theme.font, "#777777", "|") .. markup.font("Terminus 5", " "))
-
--- Eminent-like task filtering
-local orig_filter = awful.widget.taglist.filter.all
-
--- Taglist label functions
-awful.widget.taglist.filter.all = function (t, args)
-    if t.selected or #t:clients() > 0 then
-        return orig_filter(t, args)
-    end
-end
 
 function theme.at_screen_connect(s)
     -- Quake application
